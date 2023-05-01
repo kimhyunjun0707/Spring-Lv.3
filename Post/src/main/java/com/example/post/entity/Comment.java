@@ -2,28 +2,26 @@ package com.example.post.entity;
 
 import com.example.post.dto.CommentRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 
 @Builder
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class Comment extends Timestamped{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(nullable = false)
     private String content;
     @Column(nullable = false)
     private String username;
-    @JsonIgnore//???????????????
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
@@ -42,4 +40,5 @@ public class Comment extends Timestamped{
     public void update(CommentRequestDto commentRequestDto) {
         this.content = commentRequestDto.getContent();
     }
+    
 }
