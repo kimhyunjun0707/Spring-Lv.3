@@ -29,8 +29,11 @@ public class Post extends Timestamped {
     //referencedColumnName은 Join Column이 참조하는 대상의 컬럼명
     //insertable은 엔티티가 생성될 때 해당 필드를 삽입 가능한지를 결정하는 옵션
     //updatable은 엔티티가 업데이트될 때 해당 필드를 업데이트 가능한지를 결정
-    @OneToMany(mappedBy ="post",fetch = FetchType.EAGER)//mapped 연관관계의 주인이 아니다( FK가 아님) DB에 컬럼을 만들지않는다
-    private List<Comment> comment = new ArrayList<>(); //post select할때 join해서 값을 얻어오기위해서필요함
+    //mapped 연관관계의 주인이 아니다( FK가 아님) DB에 컬럼을 만들지않는다
+    // cascade = CascadeType.REMOVE를 추가하면 service부분에서 로직수행을하지않아도댐
+    @OneToMany(mappedBy ="post",fetch = FetchType.EAGER)
+    //post select할때 join해서 값을 얻어오기위해서필요함
+    private List<Comment> comment = new ArrayList<>();
 
 
 
